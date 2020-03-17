@@ -1,0 +1,23 @@
+<h1>Screens</h1>
+
+<p>Book Movie ticket for <%= @movie.title %></p>>
+
+<p>
+<%= form_tag(screens_path(@movie), {:method => :get}) do %>
+  <%= date_field_tag :date, :onchange => "this.form.submit();" %>
+<% end %>
+</p>>
+
+<table>
+  <tbody>
+    <% @screens.each do |theater_name, screens| %>
+      <tr>
+        <td><%= theater_name %></td>
+      <% @screens.each do |screen| %>
+        <td><%= screen.start_time.strftime("%H:%M %p") %></td>
+      <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>

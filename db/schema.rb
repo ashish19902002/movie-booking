@@ -70,10 +70,8 @@ ActiveRecord::Schema.define(version: 2020_03_16_115709) do
     t.text "cast"
     t.text "description"
     t.integer "duration"
-    t.bigint "theater_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["theater_id"], name: "index_movies_on_theater_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -151,7 +149,6 @@ ActiveRecord::Schema.define(version: 2020_03_16_115709) do
   add_foreign_key "auditoria", "theaters"
   add_foreign_key "auditorium_categories", "auditoria"
   add_foreign_key "auditorium_categories", "categories"
-  add_foreign_key "movies", "theaters"
   add_foreign_key "reservations", "screens"
   add_foreign_key "reservations", "users"
   add_foreign_key "screens", "auditoria"

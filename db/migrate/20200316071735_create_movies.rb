@@ -5,7 +5,6 @@ class CreateMovies < ActiveRecord::Migration[6.0]
       t.text :cast
       t.text :description
       t.integer :duration
-      t.references :theater, foreign_key: true
 
 
       t.timestamps

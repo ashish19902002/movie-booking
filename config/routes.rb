@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  root 'movies#index'
+   resources :movies, only: [:index] do
+    collection do
+      get :movies
+    end
+    member do 
+    	resources :screens, only: [:index]
+    end
+  end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
