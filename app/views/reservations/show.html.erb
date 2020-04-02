@@ -1,0 +1,8 @@
+<h1>Your Booking</h1>
+<p>Movie Name : <%= @reservation.movie_name%></p>
+<p>Movie Time : <%= @reservation.start_time%></p>
+<p>Audi  : <%= @reservation.audi_name%></p>
+<p>Seat No :  <% @reservation.seat_reservations.each do |seat_reservation| %>
+              [Row : <%=  seat_reservation.seat.row %>, Seat No :  <%=  seat_reservation.seat.number %>]
+          <%end%></p>
+<p>Totol Price  : <%= @reservation.total_price %></p>

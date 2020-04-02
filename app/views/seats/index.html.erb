@@ -1,0 +1,49 @@
+<p>Choose Seat</p>
+
+
+<% @seats.each do |row, seat_stocks| %>
+  <div>
+  <span class="row-no"><%= row %></span>
+    <% seat_stocks.each do |seat_stock| %>
+    <span class="column-no"><%= seat_stock.number%></span>
+    <%= check_box_tag "booked[seat_nos][]", seat_stock.id, seat_stock.filled, data: {price: seat_stock.price, number: seat_stock.number}, onchange: "checkTicketCount(#{params[:ticket_count]});", disabled: seat_stock.filled, class: "booking-seat" %>
+  <% end %>
+  </div>
+<% end %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="screenmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_tag(reservations_path, {:method => :post}) do %>
+      <div class="modal-body">
+          <%= hidden_field_tag :seat_ids, ""%>
+          <%= hidden_field_tag :ticket_count, params[:ticket_count]%>
+          <%= hidden_field_tag :screen_id, params[:screen_id]%>
+          <%= submit_tag "Confirm", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function checkTicketCount(ticket_count) {
+    if ($('.booking-seat:checkbox:checked:not(:disabled)').length == ticket_count) {
+        var arr = [];
+        $('.booking-seat:checkbox:checked:not(:disabled)').each(function () {
+          arr.push($(this).val());
+        });
+        $("#seat_ids").val(arr);
+        $('#screenmodal').modal('show'); 
+    }
+  }
+</script>

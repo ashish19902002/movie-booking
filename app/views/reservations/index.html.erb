@@ -1,0 +1,33 @@
+<h1>My Reservation</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Movie Name</th>
+      <th>Date & Time</th>
+      <th>Audi No</th>
+      <th>Totol Price</th>
+      <th>Seat No</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.movie_name %></td>
+        <td><%= reservation.start_time %></td>
+        <td><%= reservation.audi_name %></td>
+        <td><%= reservation.total_price %></td>
+        <td>
+          <% reservation.seat_reservations.each do |seat_reservation| %>
+              [Row : <%=  seat_reservation.seat.row %>, Seat No :  <%=  seat_reservation.seat.number %>]
+          <%end%>
+        </td>
+        <td><%= link_to "Show Invoice", reservation_path(reservation) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
